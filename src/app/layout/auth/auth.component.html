@@ -1,0 +1,31 @@
+<section class="bg-[#f6f6f6] min-h-screen flex items-center justify-center">
+     <div class="container mx-auto px-16">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+               <!-- Left: Text Content -->
+               <div class="flex items-center">
+                    <div class="max-w-xl">
+                         <h1 class="text-4xl font-bold leading-tight mb-5">
+                              Booking web <br />
+                              <span class="text-blue-600">Management System</span>
+                         </h1>
+                         <p class="text-gray-600 text-base">
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+                              itaque accusantium odio, soluta, corrupti aliquam quibusdam tempora at
+                              cupiditate quis eum maiores libero veritatis? Dicta facilis sint
+                              aliquid ipsum atque?
+                         </p>
+                    </div>
+               </div>
+
+               <!-- Right: Authentication Forms -->
+               <div class="relative min-h-screen">
+                    <div class="register-container" [class.isLogin-register-container]="isLogin">
+                         <app-register (register)="signIn($event)"></app-register>
+                    </div>
+                    <div class="login-container" [class.isLogin-login-container]="isLogin">
+                         <app-login (login)="signUp($event)"></app-login>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>

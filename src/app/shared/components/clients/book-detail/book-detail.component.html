@@ -1,0 +1,44 @@
+<div *ngIf="showPopup" (click)="closePopup()"
+     class="fixed inset-0 text-black p-5 flex flex-col justify-center items-center z-[999999]"
+     [style.backgroundColor]="'rgba(0, 0, 0, 0.6)'"
+     [ngClass]="{'animate-fadeIn': showPopup, 'animate-fadeOut': isClosing}">
+
+     <div (click)="$event.stopPropagation()" class="relative w-full max-w-2xl bg-white p-12 rounded-lg shadow-lg"
+          [ngClass]="{'animate-zoomIn': showPopup, 'animate-zoomOut': isClosing}" (animationend)="onAnimationEnd()">
+
+          <button (click)="closePopup()"
+               class="absolute top-2 right-4 text-3xl text-gray-400 hover:text-red-500 cursor-pointer">
+               ✖
+          </button>
+
+          <h2 class="text-xl font-bold text-center mb-4 text-blue-600">
+               📅 Thông tin đặt lịch
+          </h2>
+          <p><strong>Tên sân:</strong> {{ bookingInfo.clubName }}</p>
+          <p><strong>Địa chỉ:</strong> {{ bookingInfo.address }}</p>
+          <p><strong>Ngày:</strong> {{ bookingInfo.date }}</p>
+          <div *ngFor="let slot of bookingInfo.slots">
+               <p>🕒 {{ slot.time }} | 💰 {{ slot.price.toLocaleString() }} đ</p>
+          </div>
+          <p><strong>Đối tượng:</strong> {{ bookingInfo.target }}</p>
+          <p><strong>Tổng giờ:</strong> {{ bookingInfo.totalHours }}</p>
+          <p><strong>Tổng tiền:</strong> {{ bookingInfo.totalPrice.toLocaleString() }} đ</p>
+
+          <div class="mt-4">
+               <label class="block">TÊN CỦA BẠN</label>
+               <input [(ngModel)]="user.name" type="text"
+                    class="w-full p-2 rounded-lg text-black bg-white border border-gray-400 shadow-lg"
+                    placeholder="Nhập tên của bạn">
+
+               <label class="block mt-3">SỐ ĐIỆN THOẠI</label>
+               <input [(ngModel)]="user.phone" type="text"
+                    class="w-full p-2 rounded-lg text-black bg-white border border-gray-400 shadow-lg"
+                    placeholder="Nhập số điện thoại">
+          </div>
+
+          <button (click)="confirmBooking()"
+               class="w-full bg-blue-800 text-white py-2 mt-4 rounded-lg font-bold hover:bg-blue-700 cursor-pointer">
+               XÁC NHẬN & THANH TOÁN
+          </button>
+     </div>
+</div>

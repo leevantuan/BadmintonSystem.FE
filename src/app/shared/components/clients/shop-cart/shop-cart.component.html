@@ -1,0 +1,24 @@
+<div class="p-10 bg-gray-100">
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-8">
+          <div *ngFor="let watch of watchCards" class="relative group overflow-hidden cursor-pointer">
+               <div class="h-80 w-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                    [style.backgroundImage]="'url(' + watch.image + ')'">
+               </div>
+
+               <div class="absolute inset-0 bg-gray-900/50 group-hover:bg-gray-900/60 transition duration-300"></div>
+
+               <div class="absolute bottom-4 left-4 right-4 text-white z-10 
+                     transition-all duration-300 transform group-hover:-translate-y-6">
+                    <p class="text-xs tracking-widest uppercase opacity-90">{{ watch.subtitle }}</p>
+                    <h3 class="text-lg md:text-xl font-bold">{{ watch.title }}</h3>
+               </div>
+          </div>
+     </div>
+
+     <div class="text-center mt-16 px-6 flex flex-col items-center">
+          <i class="fas fa-medal text-yellow-600 text-2xl mb-2"></i>
+          <p class="text-black text-lg font-medium">
+               Chúng tôi cung cấp các mẫu chính hãng với chế độ bảo hành 3 tháng. Đảm bảo chất lượng, uy tín hàng đầu!
+          </p>
+     </div>
+</div>

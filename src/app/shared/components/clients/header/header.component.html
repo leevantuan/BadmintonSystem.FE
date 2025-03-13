@@ -1,0 +1,94 @@
+<nav class="flex justify-between items-center px-8 py-4 bg-white shadow-md navbar relative">
+     <div class="text-xl font-bold flex items-center">
+          <span class="text-blue-600 text-3xl font-bold">Badminton Chill</span>
+     </div>
+
+     <div class="hidden md:flex space-x-8">
+          <a *ngFor="let item of menuItems" [routerLink]="item.path" [routerLinkActive]="'active-menu'"
+               [routerLinkActiveOptions]="{ exact: true }" class="menu-item">
+               {{ item.label }}
+          </a>
+     </div>
+
+     <div *ngIf="isLogin; else guestButtons" class="hidden md:flex items-center space-x-4 relative">
+          <div class="relative">
+               <img [src]="userAvatar || 'assets/default-avatar.png'" alt="Avatar"
+                    class="w-12 h-12 rounded-full border cursor-pointer" (click)="toggleDropdown()" />
+
+               <div *ngIf="isDropdownOpen" class="fixed inset-0 z-40" (click)="closeDropdown()"
+                    [style.backgroundColor]="'rgba(0, 0, 0, 0.000001)'">
+               </div>
+
+               <div *ngIf="isDropdownOpen"
+                    class="absolute left-0 mt-2 w-40 bg-gray-200 shadow-xl shadow-gray-600 rounded-md overflow-hidden transition-all duration-300 z-50">
+                    <a routerLink="/profile" (click)="closeDropdown()"
+                         class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
+                         <i class="fa-solid fa-circle-user"></i>
+                         <span class="ml-2">Profile</span>
+                    </a>
+                    <a routerLink="/profile" (click)="closeDropdown()"
+                         class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
+                         <i class="fa-solid fa-gear"></i>
+                         <span class="ml-2">Settings</span>
+                    </a>
+                    <a routerLink="/profile" (click)="closeDropdown()"
+                         class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
+                         <i class="fa-solid fa-phone-volume"></i>
+                         <span class="ml-2">Support</span>
+                    </a>
+                    <hr>
+                    <button (click)="logout()"
+                         class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition cursor-pointer">
+                         <i class="fa-solid fa-right-from-bracket"></i>
+                         <span class="ml-2">Logout</span>
+                    </button>
+               </div>
+          </div>
+
+          <span class="text-xl font-semibold text-blue-700">{{ userName }}</span>
+     </div>
+
+     <ng-template #guestButtons>
+          <div class="hidden md:flex space-x-6">
+               <button routerLink="/auth"
+                    class="bg-blue-200 text-blue-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-blue-300">
+                    Login
+               </button>
+          </div>
+     </ng-template>
+
+     <button class="md:hidden text-3xl transition-transform duration-300 ease-in-out" (click)="isMenuOpen = !isMenuOpen"
+          [class.rotate-90]="isMenuOpen">
+          <i class="fas fa-bars"></i>
+     </button>
+
+     <div *ngIf="isMenuOpen"
+          class="absolute top-16 left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center py-4 transition-all duration-500 ease-in-out transform origin-top scale-y-0 opacity-0"
+          [class.scale-y-100]="isMenuOpen" [class.opacity-100]="isMenuOpen">
+          <a routerLink="/" class="menu-item py-2 transition-colors duration-300 hover:text-blue-700">HOME</a>
+          <a routerLink="/shop" class="menu-item py-2 transition-colors duration-300 hover:text-blue-700">SHOP</a>
+          <a routerLink="/book" class="menu-item py-2 transition-colors duration-300 hover:text-blue-700">BOOK</a>
+          <a routerLink="/" class="menu-item py-2 transition-colors duration-300 hover:text-blue-700">SUPPORT</a>
+
+          <div *ngIf="isLogin; else mobileGuestButtons" class="flex flex-col items-center space-y-2 mt-2">
+               <img [src]="userAvatar || 'assets/default-avatar.png'" alt="Avatar"
+                    class="w-16 h-16 rounded-full border" />
+               <span class="text-lg font-semibold">{{ userName }}</span>
+               <button (click)="logout()"
+                    class="bg-red-500 text-white px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-red-600 w-28 mt-2">
+                    Logout
+               </button>
+          </div>
+
+          <ng-template #mobileGuestButtons>
+               <button
+                    class="bg-blue-200 text-blue-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-blue-300 w-28 mt-2 transition-all duration-300">
+                    Login
+               </button>
+               <button
+                    class="bg-gray-200 text-gray-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-gray-300 w-28 mt-2 transition-all duration-300">
+                    Sign Up
+               </button>
+          </ng-template>
+     </div>
+</nav>

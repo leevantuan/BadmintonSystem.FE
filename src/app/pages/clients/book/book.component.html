@@ -1,0 +1,63 @@
+<div class="p-6 bg-white h-full">
+     <div class="flex items-center justify-between mb-2">
+          <div class="flex space-x-4">
+               <div class="flex items-center">
+                    <div class="w-4 h-4 bg-white border mr-2"></div>
+                    <span>Trống</span>
+               </div>
+               <div class="flex items-center">
+                    <div class="w-4 h-4 bg-red-500 mr-2"></div>
+                    <span>Đã đặt</span>
+               </div>
+               <div class="flex items-center">
+                    <div class="w-4 h-4 bg-gray-400 mr-2"></div>
+                    <span>Khóa</span>
+               </div>
+               <div class="flex items-center">
+                    <div class="w-4 h-4 bg-yellow-300 mr-2"></div>
+                    <span>Đã chọn</span>
+               </div>
+          </div>
+
+          <div class="ml-auto flex items-center space-x-2 cursor-pointer relative mb-4 bg-gray-200 rounded-md">
+               <app-date-picker class="w-[400px]" (dateSelected)="onDateSelected($event)"></app-date-picker>
+          </div>
+
+     </div>
+
+     <div class="overflow-x-auto">
+          <table class="border-collapse w-full">
+               <thead>
+                    <tr>
+                         <th class="p-2 border bg-blue-300">Sân</th>
+                         <th *ngFor="let slot of fields[0]?.slots" class="p-2 border bg-blue-300">{{ slot.time }}</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr *ngFor="let field of fields">
+                         <td class="p-2 border bg-blue-300">{{ field.name }}</td>
+                         <td *ngFor="let slot of field.slots" class="p-2 border cursor-pointer text-center"
+                              [ngClass]="getSlotClass(field, slot)" (click)="toggleSlot(field, slot)">
+                         </td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+
+     <div class="fixed bottom-0 left-0 w-full px-1 pb-1">
+          <div class="bg-gray-400 text-white p-4 rounded-t-2xl rounded-b-md shadow-lg shadow-white/50">
+               <div class="font-bold flex flex-col">
+                    <p class="whitespace-normal">Tổng giờ: {{ selectedSlots.length * 0.5 }}h</p>
+                    <div class="border-t border-white my-2"></div>
+                    <p>Tổng tiền: {{ totalPrice | currency:'VND' }}</p>
+               </div>
+
+               <button (click)="openPopup()" class=" mt-2 bg-blue-900 px-10 py-4 text-white font-bold rounded w-full cursor-pointer shadow-lg
+                    shadow-white/50">
+                    TIẾP THEO
+               </button>
+          </div>
+     </div>
+</div>
+
+<app-book-detail [showPopup]="showPopup" (showPopupChange)="handlePopupChange($event)"></app-book-detail>

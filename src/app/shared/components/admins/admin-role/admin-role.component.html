@@ -1,0 +1,72 @@
+<div class="p-4 pb-0 rounded-lg flex">
+
+     <div class="w-1/4 border-r border-gray-200 px-6">
+          <h2 class="text-2xl text-gray-6800 font-semibold text-shadow mb-4">Nhóm quyền</h2>
+          <ul>
+               <li *ngFor="let role of roles" (click)="selectRole(role)" [class.text-blue-500]="selectedRole === role"
+                    [class.bg-gray-200]="selectedRole === role"
+                    class="p-2 cursor-pointer hover:bg-gray-100 rounded-md font-semibold">
+                    {{ role.name }}
+               </li>
+          </ul>
+     </div>
+
+     <div class="w-3/4 px-6">
+          <h2 class="text-2xl text-gray-6800 font-semibold text-shadow mb-4">Thiết lập quyền - {{ selectedRole.name }}
+          </h2>
+
+          <div class="overflow-x-auto">
+               <table class="w-full border border-gray-200">
+                    <thead>
+                         <tr class="bg-gray-100">
+                              <th class="px-4 py-2 text-left border border-gray-300">Chức năng</th>
+                              <th class="px-4 py-2 text-center border border-gray-300">Truy cập</th>
+                              <th class="px-4 py-2 text-center border border-gray-300">Thêm mới</th>
+                              <th class="px-4 py-2 text-center border border-gray-300">Sửa</th>
+                              <th class="px-4 py-2 text-center border border-gray-300">Xóa</th>
+                              <th class="px-4 py-2 text-center border border-gray-300">Xem tất cả</th>
+                         </tr>
+                    </thead>
+
+                    <tbody>
+                         <tr *ngFor="let permission of pagedPermissions">
+                              <td class="px-4 py-1.75 border-gray-300 border">{{ permission.name }}</td>
+                              <td class="px-4 py-1.75 border-gray-300 border text-center">
+                                   <input type="checkbox" [(ngModel)]="permission.access" />
+                              </td>
+                              <td class="px-4 py-1.75 border-gray-300 border text-center">
+                                   <input type="checkbox" [(ngModel)]="permission.create" />
+                              </td>
+                              <td class="px-4 py-1.75 border-gray-300 border text-center">
+                                   <input type="checkbox" [(ngModel)]="permission.edit" />
+                              </td>
+                              <td class="px-4 py-1.75 border-gray-300 border text-center">
+                                   <input type="checkbox" [(ngModel)]="permission.delete" />
+                              </td>
+                              <td class="px-4 py-1.75 border-gray-300 border text-center">
+                                   <input type="checkbox" [(ngModel)]="permission.viewAll" />
+                              </td>
+                         </tr>
+                    </tbody>
+               </table>
+
+               <div class="flex justify-between items-center mt-5">
+                    <button (click)="previousPage()"
+                         class="px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-gray-300 transition shadow-lg"
+                         [disabled]="currentPage === 1">
+                         Previous
+                    </button>
+
+                    <div>
+                         <span class="text-blue-700">Page {{ currentPage }} of {{ totalPages }}</span>
+                    </div>
+
+                    <button (click)="nextPage()"
+                         class="shadow-lg px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-gray-300 transition"
+                         [disabled]="currentPage === totalPages">
+                         Next
+                    </button>
+               </div>
+          </div>
+     </div>
+</div>

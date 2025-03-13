@@ -1,0 +1,69 @@
+<table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+     <thead>
+          <tr class="bg-blue-300 border-b border-gray-300">
+               <th *ngFor="let header of headers" class="py-3 px-4 text-left font-semibold border-r border-gray-300">
+                    {{ header }}
+               </th>
+               <th class="py-3 px-4 text-center font-semibold">Action</th>
+          </tr>
+     </thead>
+     <tbody>
+          <tr *ngFor="let row of paginatedData; let i = index" class="border-b border-gray-200 hover:bg-gray-100"
+               [ngClass]="{ 'bg-blue-100': i % 2 === 1 }">
+               <td *ngFor="let key of headers" class="py-3 px-4 text-left border-r border-gray-200" [ngClass]="{
+                    ' text-green-500': key.toLowerCase() === 'status' && row.status === '1',
+                    ' text-red-500': key.toLowerCase() === 'status' && row.status === '0'
+                  }">
+                    <i *ngIf="key.toLowerCase() === 'status'" class="fa-solid fa-circle" [ngClass]="{
+                         'text-green-500': row.status === '1',
+                         'text-red-500': row.status === '0'
+                    }">
+                    </i>
+                    <span *ngIf="key.toLowerCase() === 'status'">
+                         {{ row[key.toLowerCase()] === '1' ? 'Active' : 'Disabled' }}
+                    </span>
+                    <span *ngIf="key.toLowerCase() !== 'status'">
+                         {{ row[key.toLowerCase()] }}
+                    </span>
+               </td>
+               <td class="py-2 px-4 text-center relative">
+                    <button (click)="togglePopup(row)" class="p-2 hover:bg-gray-200 rounded-full">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-6 h-6 text-blue-600">
+                              <path stroke-linecap="round" stroke-linejoin="round"
+                                   d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                         </svg>
+                    </button>
+
+                    <div *ngIf="selectedItem === row"
+                         class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 shadow-lg rounded-lg z-50">
+                         <ul>
+                              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-blue-600"
+                                   (click)="editItem(row)">Edit</li>
+                              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+                                   (click)="deleteItem(row)">Delete</li>
+                         </ul>
+                    </div>
+               </td>
+          </tr>
+     </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="flex justify-between items-center mt-5">
+     <button (click)="previousPage()"
+          class="px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-gray-300 transition shadow-lg"
+          [disabled]="currentPage === 1">
+          Previous
+     </button>
+
+     <div>
+          <span class="text-blue-700">Page {{ currentPage }} of {{ totalPages }}</span>
+     </div>
+
+     <button (click)="nextPage()"
+          class="shadow-lg px-4 py-2 bg-gray-200 rounded cursor-pointer hover:bg-gray-300 transition"
+          [disabled]="currentPage === totalPages">
+          Next
+     </button>
+</div>

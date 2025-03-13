@@ -1,0 +1,115 @@
+<section class="min-h-screen flex items-center justify-center">
+     <div class="bg-white shadow-lg rounded-xl p-10 w-full max-w-2xl">
+          <h2 class="text-4xl font-bold text-center text-blue-600 mb-6">
+               REGISTER
+          </h2>
+          <form [formGroup]="registerForm">
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                         <label for="firstName" class="block text-gray-700 text-lg"
+                              [ngClass]="{ 'text-red-600': firstNameError }">First name</label>
+                         <input type="text" formControlName="firstName" [ngClass]="{ 'border-red-600': firstNameError }"
+                              class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300" />
+                         <div class="text-red-600" *ngIf="firstNameError">
+                              <span>{{ firstNameError }}</span>
+                         </div>
+                    </div>
+                    <div>
+                         <label for="lastName" class="block text-gray-700 text-lg"
+                              [ngClass]="{ 'text-red-600': lastNameError }">Last name</label>
+                         <input type="text" formControlName="lastName" [ngClass]="{ 'border-red-600': lastNameError }"
+                              class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300" />
+                         <div class="text-red-600" *ngIf="lastNameError">
+                              <span>{{ lastNameError }}</span>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                         <label for="email" class="block text-gray-700 text-lg"
+                              [ngClass]="{ 'text-red-600': emailError }">Email address</label>
+                         <input type="email" formControlName="email" [ngClass]="{ 'border-red-600': emailError }"
+                              class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300" />
+                         <div class="text-red-600" *ngIf="emailError">
+                              <span>{{ emailError }}</span>
+                         </div>
+                    </div>
+                    <div>
+                         <label for="phone" class="block text-gray-700 text-lg"
+                              [ngClass]="{ 'text-red-600': phoneError }">Phone number</label>
+                         <input type="tel" formControlName="phone" [ngClass]="{ 'border-red-600': phoneError }"
+                              class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300" />
+                         <div class="text-red-600" *ngIf="phoneError">
+                              <span>{{ phoneError }}</span>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                         <div class="relative">
+                              <label for="password" class="block text-gray-700 text-lg"
+                                   [ngClass]="{ 'text-red-600': passwordError }">Password</label>
+                              <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                                   [ngClass]="{ 'border-red-600': passwordError }"
+                                   class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300 pr-10">
+                              <i (click)="togglePassword()" class="absolute right-3 top-11 text-gray-600 cursor-pointer"
+                                   [ngClass]="!showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                         </div>
+                         <div class="text-red-600" *ngIf="passwordError">
+                              <span>{{ passwordError }}</span>
+                         </div>
+                    </div>
+
+                    <div>
+                         <div class="relative">
+                              <label for="confirmPassword" class="block text-gray-700 text-lg"
+                                   [ngClass]="{ 'text-red-600': confirmPasswordError }">Confirm Password</label>
+                              <input [type]="showConfirmPassword ? 'text' : 'password'"
+                                   formControlName="confirmPassword"
+                                   [ngClass]="{ 'border-red-600': confirmPasswordError }"
+                                   class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300 pr-10">
+                              <i (click)="toggleConfirmPassword()"
+                                   class="absolute right-3 top-11 text-gray-600 cursor-pointer"
+                                   [ngClass]="!showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                         </div>
+                         <div class="text-red-600" *ngIf="confirmPasswordError">
+                              <span>{{ confirmPasswordError }}</span>
+                         </div>
+                    </div>
+               </div>
+
+               <button type="submit" [disabled]="registerForm.invalid" (click)="onSubmit()"
+                    class="mt-8 w-full bg-blue-600 text-white py-3 rounded-lg text-lg hover:bg-blue-700 hover:cursor-pointer transition disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    Sign up
+               </button>
+               <div class="mt-4 text-center">
+                    <p class="text-gray-600 text-sm">
+                         Already have an account?
+                         <a (click)="signIn()" class="text-blue-600 font-semibold hover:underline cursor-pointer">Sign
+                              in</a>
+                    </p>
+               </div>
+          </form>
+
+          <!-- Social Buttons -->
+          <div class="mt-2 text-center">
+               <p class="text-gray-600 text-sm">or sign up with:</p>
+               <div class="flex justify-center space-x-6 mt-4 text-2xl">
+                    <button class="text-blue-600 cursor-pointer">
+                         <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="text-red-600 cursor-pointer">
+                         <i class="fab fa-google"></i>
+                    </button>
+                    <button class="text-blue-400 cursor-pointer">
+                         <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="text-gray-800 cursor-pointer">
+                         <i class="fab fa-github"></i>
+                    </button>
+               </div>
+          </div>
+     </div>
+</section>

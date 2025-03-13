@@ -1,0 +1,30 @@
+<div class="container mx-auto mt-1 w-full h-full px-4">
+     <div class="mb-6 flex justify-between items-center">
+          <h2 class="text-2xl text-gray-6800 font-semibold text-shadow">Latest Transactions</h2>
+
+          <div class="flex items-center gap-2">
+               <div
+                    class="flex items-center border border-gray-400 rounded px-2 py-1 shadow-lg focus-within:border-blue-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-500">
+                         <circle cx="11" cy="11" r="8"></circle>
+                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+
+                    <input type="text" placeholder="Search..." class="border-none outline-none px-2 py-0.5 flex-1"
+                         [(ngModel)]="searchTerm" />
+               </div>
+
+               <button
+                    class="transition bg-gray-300 text-black cursor-pointer px-4 py-1.5 rounded hover:bg-gray-400 border border-gray-300 shadow-lg"
+                    (click)="createTransaction()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+
+               </button>
+          </div>
+     </div>
+     <app-admin-table [headers]="tableHeaders" [data]="transactions" [itemsPerPage]="6" />
+</div>

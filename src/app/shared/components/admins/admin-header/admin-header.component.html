@@ -1,0 +1,35 @@
+<header class="flex items-center justify-between px-6 py-3 bg-white m-3 shadow-lg rounded-xl ml-8">
+     <!-- Left: Menu + Search -->
+     <div class="flex items-center gap-4">
+          <!-- Menu Icon -->
+          <button (click)="toggleMenuClick()"
+               class="text-gray-500 dark:text-gray-300 text-3xl cursor-pointer hover:text-blue-600 p-2">
+               <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Search Input -->
+          <div class="relative">
+               <input type="text" placeholder="Search or type command..."
+                    class="pl-10 pr-16 py-2 w-64 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:outline-none" />
+               <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+               <span class="absolute right-3 top-2 text-sm text-gray-400 font-medium">⌘K</span>
+          </div>
+     </div>
+
+     <!-- Right: Dark Mode, Notification, Profile -->
+     <div class="flex items-center gap-4">
+
+          <!-- Notification -->
+          <button class="text-gray-500 dark:text-gray-300 text-xl">
+               <i class="fas fa-bell"></i>
+          </button>
+
+          <!-- Profile -->
+          <div class="flex items-center gap-2">
+               <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Profile"
+                    class="w-10 h-10 rounded-full border border-gray-300" />
+               <span class="text-gray-700 dark:text-gray-200 font-medium">Musharof</span>
+               <i class="fas fa-chevron-down text-gray-400"></i>
+          </div>
+     </div>
+</header>

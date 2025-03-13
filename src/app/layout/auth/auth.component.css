@@ -1,0 +1,30 @@
+.min-h-screen {
+  position: relative;
+  height: 100vh; /* Đảm bảo chiều cao đầy đủ của màn hình */
+  overflow: hidden; /* Ẩn các phần tử bên ngoài */
+}
+
+.register-container,
+.login-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.login-container {
+  transform: translateY(0%) !important;
+}
+
+.register-container {
+  transform: translateY(100%) !important;
+}
+
+/* Khi isLogin là true */
+.isLogin-register-container {
+  transform: translateY(0%) !important;
+}
+
+.isLogin-login-container {
+  transform: translateY(-100%) !important;
+}

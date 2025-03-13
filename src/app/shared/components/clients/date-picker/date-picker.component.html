@@ -1,0 +1,71 @@
+<div class="relative">
+     <div class="relative">
+          <input type="text" [formControl]="dateControl" (click)="toggleDatepicker()" placeholder="Select a date"
+               readonly
+               class="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+               <svg class="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+               </svg>
+          </div>
+     </div>
+
+     @if (showDatepicker) {
+     <div class="fixed inset-0 flex items-center justify-center z-10" [style.backgroundColor]="'rgba(0, 0, 0, 0.6)'"
+          (click)="closeDatepicker()">
+          <div class="bg-white border border-gray-300 rounded-md shadow-xl z-20" (click)="$event.stopPropagation()">
+               <!-- Calendar Header -->
+               <div class="flex items-center justify-between px-4 py-3 border-b">
+                    <button type="button" (click)="previousMonth()" class="p-2 rounded-md hover:bg-neutral-100">
+                         <svg class="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                              </path>
+                         </svg>
+                    </button>
+                    <span class="text-lg font-semibold text-neutral-800">
+                         {{ formatMonthYear(currentMonth) }}
+                    </span>
+                    <button type="button" (click)="nextMonth()" class="p-2 rounded-md hover:bg-neutral-100">
+                         <svg class="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                              </path>
+                         </svg>
+                    </button>
+               </div>
+
+               <div
+                    class="grid grid-cols-7 text-center text-base font-semibold text-neutral-700 border-b bg-blue-200 p-2">
+                    @for (day of weekdays; track day) {
+                    <div class="py-2">
+                         {{ day }}
+                    </div>
+                    }
+               </div>
+
+               <div class="grid grid-cols-7 text-sm p-2 gap-2">
+                    @for (date of daysInMonth; track date) {
+                    <button type="button" (click)="selectDate(date)" [class]="
+                   'h-10 w-12 mx-auto flex items-center justify-center rounded-md hover:bg-blue-100 ' +
+                   (!isCurrentMonth(date) ? 'text-neutral-400' : '') +
+                   (isSelected(date) ? ' bg-blue-600 text-white hover:bg-blue-700' : '') +
+                   (isToday(date) && !isSelected(date) ? ' bg-blue-100' : '')
+                 ">
+                         {{ date.getDate() }}
+                    </button>
+                    }
+               </div>
+
+               <!-- Buttons -->
+               <div class="flex justify-end p-4 space-x-2">
+                    <button type="button" (click)="closeDatepicker()"
+                         class="px-4 py-2 bg-gray-300 rounded-md cursor-pointer">Cancel</button>
+               </div>
+          </div>
+     </div>
+     }
+</div>

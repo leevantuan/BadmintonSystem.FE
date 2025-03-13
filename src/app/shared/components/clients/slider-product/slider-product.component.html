@@ -1,0 +1,48 @@
+<div class="flex h-full w-full flex-1 items-center justify-between p-4">
+  <button (click)="prevSlide()"
+    [ngClass]="{'opacity-50 cursor-not-allowed': isPrevDisabled(), 'cursor-pointer': !isPrevDisabled()}"
+    class="rounded-full bg-gray-300 p-2 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+      class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+  </button>
+
+  <div class="w-[1342px] overflow-hidden">
+    <div class="flex gap-8 transition-transform duration-500 ease-in-out"
+      [ngStyle]="{ transform: 'translateX(' + translateX + 'px)' }">
+
+      <div
+        class="relative min-w-[426px] overflow-hidden bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:cursor-pointer"
+        *ngFor="let story of stories">
+
+        <div class="flex h-[341px] w-full items-center justify-center bg-gray-300">
+          <img [src]="story.image" [alt]="story.title" class="w-full h-full object-cover" />
+        </div>
+
+        <div class="p-6 flex flex-col items-center justify-center text-center">
+          <div class="text-[16px] leading-[22px] font-medium text-black">
+            {{ story.title }}
+          </div>
+
+          <div class="mt-2 flex items-center gap-3">
+            <img [src]="story.authorAvatar" alt="Author" class="w-8 h-8 rounded-full" />
+            <div class="text-left">
+              <p class="text-sm text-black">{{ story.author }}</p>
+              <p class="text-xs">{{ story.date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="nextSlide()"
+    [ngClass]="{'opacity-50 cursor-not-allowed': isNextDisabled(), 'cursor-pointer': !isNextDisabled()}"
+    class="rounded-full bg-gray-300 p-2 text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+      class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 19.5 7.5-7.5-7.5-7.5" />
+    </svg>
+  </button>
+</div>

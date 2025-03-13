@@ -1,0 +1,22 @@
+<div class="bg-white py-10 p-8 pt-16 pb-16">
+     <h2 class="text-center text-5xl text-blue-700 mb-12">
+          Featured
+     </h2>
+     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-4">
+          <div *ngFor="let watch of watches"
+               class="bg-white cursor-pointer text-center transition duration-300 hover:shadow-md group">
+               <div class="bg-gray-100 border border-gray-300 overflow-hidden relative">
+                    <img [src]="watch.image" [alt]="watch.name" class="w-full h-100 object-cover">
+                    <div class="absolute inset-0 bg-black/20"></div>
+
+                    <button
+                         class="cursor-pointer absolute bottom-0 left-0 w-full bg-blue-400 text-white py-3 opacity-0 translate-y-full transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                         View
+                    </button>
+               </div>
+               <h3 class="text-sm text-gray-700 mt-4 uppercase">{{ watch.brand }}</h3>
+               <p class="text-gray-600">{{ watch.name }}</p>
+               <p class="text-lg text-gray-900 mt-2 pb-8">${{ watch.price | number }}</p>
+          </div>
+     </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="flex py-2">
+     <!-- Danh sách sân -->
+     <div class="w-2/3 p-4">
+          <div class="flex items-center justify-between mb-4">
+               <div>
+                    <div class="flex space-x-2">
+                         <button (click)="selectedStatus = 'all'"
+                              [ngClass]="{'bg-gray-700 text-white': selectedStatus === 'all', 'bg-gray-200': selectedStatus !== 'all'}"
+                              class="p-2 rounded cursor-pointer">Tất cả</button>
+
+                         <button (click)="selectedStatus = 'available'"
+                              [ngClass]="{'bg-blue-500 text-white': selectedStatus === 'available', 'bg-gray-200': selectedStatus !== 'available'}"
+                              class="p-2 rounded cursor-pointer">Trống</button>
+
+                         <button (click)="selectedStatus = 'playing'"
+                              [ngClass]="{'bg-red-500 text-white': selectedStatus === 'playing', 'bg-gray-200': selectedStatus !== 'playing'}"
+                              class="p-2 rounded cursor-pointer">Đang đánh</button>
+
+                         <button (click)="selectedStatus = 'booked'"
+                              [ngClass]="{'bg-yellow-500 text-white': selectedStatus === 'booked', 'bg-gray-200': selectedStatus !== 'booked'}"
+                              class="p-2 rounded cursor-pointer">Đã đặt</button>
+                    </div>
+               </div>
+
+               <div>
+                    <label class="font-semibold mr-2">Khung giờ:</label>
+                    <select [(ngModel)]="selectedTime" class="border p-2 rounded">
+                         <option *ngFor="let time of times" [value]="time">{{ time }}</option>
+                    </select>
+                    <button (click)="filterCourts()" class="bg-gray-700 text-white px-4 py-2 rounded ml-2">Lọc</button>
+               </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4">
+               <div *ngFor="let court of filteredCourts"
+                    class="p-6 py-12 rounded-lg text-center text-white cursor-pointer" [ngClass]="{
+          'bg-blue-500': court.status === 'available',
+          'bg-red-500': court.status === 'playing',
+          'bg-yellow-500': court.status === 'booked'
+        }" (click)="selectCourt(court)">
+                    {{ court.name }}
+               </div>
+          </div>
+     </div>
+
+
+     <!-- Chi tiết đặt sân -->
+     <!-- Nội dung đặt sân -->
+     <div class="w-1/3 p-4 border-l max-h-[calc(100vh-220px)] overflow-y-auto">
+          <div *ngIf="selectedCourt">
+               <h2 class="text-lg font-bold">Sân {{ selectedCourt.name }}</h2>
+               <p class="text-gray-600 text-sm">Tổng giờ: {{ totalHours }}</p>
+               <p class="text-red-500 font-bold text-sm">Tiền sân: {{ totalCourtCost }} VNĐ</p>
+
+               <table class="w-full mt-4 border text-sm">
+                    <thead class="bg-gray-100">
+                         <tr>
+                              <th class="p-2">Tên món</th>
+                              <th class="p-2">Số lượng</th>
+                              <th class="p-2">Thành tiền</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let item of selectedCourt.items" class="border-t">
+                              <td class="p-2">{{ item.name }}</td>
+                              <td class="p-2 text-center flex items-center justify-center">
+                                   <button (click)="decreaseQuantity(item)" class="bg-gray-300 px-2 rounded">-</button>
+                                   <span class="px-3">{{ item.quantity }}</span>
+                                   <button (click)="increaseQuantity(item)" class="bg-gray-300 px-2 rounded">+</button>
+                              </td>
+                              <td class="p-2 text-right">{{ item.price * item.quantity }} VNĐ</td>
+                         </tr>
+                    </tbody>
+               </table>
+
+               <p class="mt-4 font-bold text-sm">Tổng cộng: {{ totalAmount }} VNĐ</p>
+               <p class="text-red-500 text-sm">Thành viên (-20%): -{{ discount }} VNĐ</p>
+               <p class="text-red-500 text-sm">Nhập khuyến mãi: -{{ promoDiscount }} VNĐ</p>
+               <p class="text-lg font-bold">Thành tiền: {{ finalAmount }} VNĐ</p>
+
+               <div class="mt-4 flex space-x-2">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded text-sm cursor-pointer"
+                         (click)="openInvoice()">Thanh toán</button>
+               </div>
+          </div>
+     </div>
+
+     <!-- Popup hóa đơn -->
+     <div *ngIf="showInvoice" class="fixed inset-0 flex justify-center items-center"
+          [style.backgroundColor]="'rgba(0, 0, 0, 0.6)'" (click)="closeInvoice()">
+          <div class="bg-white p-6 rounded-lg shadow-lg w-1/3" (click)="$event.stopPropagation()">
+               <h2 class="text-lg font-bold mb-4">Hóa đơn</h2>
+               <p class="text-sm">Sân: {{ selectedCourt?.name }}</p>
+               <p class="text-sm">Tổng giờ: {{ totalHours }}</p>
+               <p class="text-sm">Tiền sân: {{ totalCourtCost }} VNĐ</p>
+
+               <table class="w-full mt-2 border text-sm">
+                    <thead class="bg-gray-100">
+                         <tr>
+                              <th class="p-2">Tên món</th>
+                              <th class="p-2">Số lượng</th>
+                              <th class="p-2">Thành tiền</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let item of selectedCourt?.items" class="border-t">
+                              <td class="p-2">{{ item.name }}</td>
+                              <td class="p-2 text-center">{{ item.quantity }}</td>
+                              <td class="p-2 text-right">{{ item.price * item.quantity }} VNĐ</td>
+                         </tr>
+                    </tbody>
+               </table>
+
+               <p class="mt-4 font-bold text-sm">Tổng cộng: {{ totalAmount }} VNĐ</p>
+               <p class="text-red-500 text-sm">Thành viên (-20%): -{{ discount }} VNĐ</p>
+               <p class="text-red-500 text-sm">Nhập khuyến mãi: -{{ promoDiscount }} VNĐ</p>
+               <p class="text-lg font-bold">Thành tiền: {{ finalAmount }} VNĐ</p>
+
+               <div class="mt-4 flex justify-end space-x-2">
+                    <button class="bg-gray-500 text-white px-4 py-2 rounded text-sm cursor-pointer"
+                         (click)="closeInvoice()">Đóng</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded text-sm cursor-pointer"
+                         (click)="exportInvoice()">Xuất hóa
+                         đơn</button>
+               </div>
+          </div>
+     </div>
+
+
+
+</div>

@@ -1,0 +1,44 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.8s ease-in-out;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 110%;
+  }
+}
+
+.typing-animation {
+  display: inline-block;
+  border-right: 3px solid #2563eb;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 5s steps(30, end) infinite alternate;
+}

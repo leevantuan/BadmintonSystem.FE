@@ -1,0 +1,70 @@
+<div class="w-full flex flex-col justify-center items-center bg-white h-full p-6 shadow-xl">
+     <div class="space-y-6 w-full px-16">
+          <!-- Header Section -->
+          <div class="flex items-center justify-between w-full">
+               <div class="flex items-center space-x-6">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNXyhMS8dNJTOnVRHAmnWXUlkG9pjyZeutUQ&s"
+                         alt="Profile Picture" class="w-28 h-28 rounded-full border-4 border-blue-300">
+                    <div>
+                         <div class="text-lg font-semibold">{{ userName }}</div>
+                         <div class="text-gray-500">{{ email }}</div>
+                    </div>
+               </div>
+               <button (click)="updateProfile()"
+                    class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all cursor-pointer">
+                    Save
+               </button>
+          </div>
+
+          <!-- Form Section -->
+          <form [formGroup]="profileForm" class="grid grid-cols-2 gap-6 gap-x-20">
+               <div>
+                    <label class="block text-gray-600">
+                         First Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" formControlName="firstName" placeholder="Enter your first name"
+                         class="border-gray-400  w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+               </div>
+               <div>
+                    <label class="block text-gray-600">
+                         Last Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" formControlName="lastName" placeholder="Enter your last name"
+                         class=" border-gray-400  w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+               </div>
+               <div>
+                    <label class="block text-gray-600">
+                         User Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" formControlName="userName" placeholder="Enter your username"
+                         class="border-gray-400  w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+               </div>
+               <div>
+                    <label class="block text-gray-600">
+                         Email <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" formControlName="email" placeholder="Enter your email"
+                         class="border-gray-400  w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+               </div>
+               <div>
+                    <label class="block text-gray-600">
+                         Phone <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" formControlName="phone" placeholder="Enter your phone number"
+                         class="border-gray-400  w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+               </div>
+               <div>
+                    <label class="block text-gray-600">
+                         Gender <span class="text-red-500">*</span>
+                    </label>
+                    <select formControlName="gender"
+                         class="border-gray-400 w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
+                         <option value="" disabled selected>Select your gender</option>
+                         <option>Male</option>
+                         <option>Female</option>
+                         <option>Other</option>
+                    </select>
+               </div>
+          </form>
+     </div>
+</div>

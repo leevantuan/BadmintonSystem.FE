@@ -1,0 +1,64 @@
+<div class="relative w-full h-[calc(100vh-80px)] overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-full flex transition-transform duration-500 ease-in-out"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+    <div *ngFor="let slide of slides" class="relative w-full shrink-0 bg-cover bg-center flex items-center"
+      [style.background-image]="'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + slide.img + ')'">
+
+      <div class="absolute bottom-10 left-12 w-1/2 max-w-4xl p-6 animate-slide-in flex flex-col items-start">
+        <h2 class="text-5xl text-white typing-animation">{{ slide.title }}</h2>
+        <p class="text-lg text-gray-200 mt-2 border-l-4 border-blue-500 pl-4">
+          {{ slide.description }}
+        </p>
+
+        <div class="flex space-x-4 mt-8">
+          <button class="h-12 w-36 text-lg border-2 border-white text-white rounded-lg shadow-md transition cursor-pointer 
+         hover:bg-blue-200 hover:border-blue-200 hover:text-black">
+            Learn More
+          </button>
+        </div>
+
+        <div class="mt-6 flex space-x-4">
+          <a href="https://facebook.com/badmintonchill"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition">
+            <i class="fab fa-facebook text-2xl"></i>
+          </a>
+          <a href="https://instagram.com/badmintonchill"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white transition">
+            <i class="fab fa-instagram text-2xl"></i>
+          </a>
+          <a href="mailto:contact@badmintonchill.com"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition">
+            <i class="fas fa-envelope text-2xl"></i>
+          </a>
+          <a href="https://youtube.com/badmintonchill"
+            class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition">
+            <i class="fab fa-youtube text-2xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="prevSlide()"
+    class="hover:bg-opacity-50 absolute top-1/2 left-4 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white transition duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+      class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+  </button>
+
+  <button (click)="nextSlide()"
+    class="hover:bg-opacity-50 absolute top-1/2 right-4 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white transition duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+      class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+  </button>
+
+  <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform gap-2">
+    <button *ngFor="let slide of slides; let i = index" (click)="goToSlide(i)"
+      [class]="'h-3 w-3 rounded-full transition-colors duration-300 ' + (currentIndex === i ? 'bg-blue-600' : 'bg-white')">
+      <span></span>
+    </button>
+  </div>
+</div>

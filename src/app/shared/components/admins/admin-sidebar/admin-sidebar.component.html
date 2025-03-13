@@ -1,0 +1,51 @@
+<nav class="overflow-hidden w-full h-[calc(100%-24px)] bg-white text-gray-900 flex flex-col transition-all duration-300
+     px-3 shadow-lg rounded-xl m-3">
+
+     <!-- Logo -->
+     <div class="mb-3 mt-4 p-4 text-blue-500 text-3xl font-bold border-b border-gray-300 flex items-center justify-center text-shadow"
+          *ngIf="!isCollapsed">
+          BADMINTON
+     </div>
+
+     <!-- Menu -->
+     <ul class="flex-1 overflow-y-auto mt-1">
+          <li *ngFor="let menu of menus" class="group">
+               <button class="cursor-pointer w-full text-left px-4 py-2 flex justify-between items-center transition-all duration-300 rounded-lg
+                    hover:bg-blue-400 hover:text-white" [class.bg-blue-500]="isMenuActive(menu.key)"
+                    [class.text-white]="isMenuActive(menu.key)" [class.shadow-lg]="isMenuActive(menu.key)"
+                    (click)="toggleSubmenu(menu)">
+
+                    <div class="flex items-center py-1 ">
+                         <i [ngClass]="menu.icon"></i>
+                         <span *ngIf="!isCollapsed" class="ml-2">{{ menu.key }}</span>
+                    </div>
+
+                    <svg *ngIf="menu.subMenus.length > 0" xmlns="http://www.w3.org/2000/svg"
+                         class="w-4 h-4 transform transition-transform duration-300"
+                         [class.rotate-180]="submenuOpen[menu.key]" viewBox="0 0 20 20" fill="currentColor">
+                         <path fill-rule="evenodd"
+                              d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                              clip-rule="evenodd" />
+                    </svg>
+               </button>
+
+               <!-- Submenu -->
+               <ul *ngIf="submenuOpen[menu.key]" class="pl-6 bg-white transition-all duration-300">
+                    <li *ngFor="let sub of menu.subMenus" class="py-2 px-4 w-full cursor-pointer transition-all duration-300 rounded-lg
+                         hover:bg-blue-400 hover:text-white" [class.bg-blue-400]="activeSubmenu === sub"
+                         [class.text-white]="activeSubmenu === sub" [class.shadow-lg]="activeSubmenu === sub"
+                         (click)="setActiveSubmenu(menu.key, sub)">
+                         {{ sub }}
+                    </li>
+               </ul>
+          </li>
+     </ul>
+
+
+     <!-- Logout Button -->
+     <button routerLink="/"
+          class="cursor-pointer m-2 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition-all duration-300">
+          <i class="fa-solid fa-power-off"></i>
+          <span *ngIf="!isCollapsed" class="ml-2">Back to Client</span>
+     </button>
+</nav>
