@@ -78,7 +78,7 @@ export class AdminYardComponent {
   ];
 
   currentPage = 1;
-  itemsPerPage = 7;
+  itemsPerPage = 6;
   searchTerm: string = '';
 
   get filteredTransactions() {

@@ -32,10 +32,10 @@
                <!-- Submenu -->
                <ul *ngIf="submenuOpen[menu.key]" class="pl-6 bg-white transition-all duration-300">
                     <li *ngFor="let sub of menu.subMenus" class="py-2 px-4 w-full cursor-pointer transition-all duration-300 rounded-lg
-                         hover:bg-blue-400 hover:text-white" [class.bg-blue-400]="activeSubmenu === sub"
-                         [class.text-white]="activeSubmenu === sub" [class.shadow-lg]="activeSubmenu === sub"
-                         (click)="setActiveSubmenu(menu.key, sub)">
-                         {{ sub }}
+                         hover:bg-blue-400 hover:text-white" [class.bg-blue-400]="activeSubmenu === sub.key"
+                         [class.text-white]="activeSubmenu === sub.key" [class.shadow-lg]="activeSubmenu === sub.key"
+                         (click)="setActiveSubmenu(menu.key, sub.key, sub.path)">
+                         {{ sub.key }}
                     </li>
                </ul>
           </li>

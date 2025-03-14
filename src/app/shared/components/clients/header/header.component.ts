@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   isAdmin() {
     const isAdmin = localStorage.getItem('isAdmin');
     if (isAdmin && isAdmin == 'true') {
-      this.menuItems.push({ label: 'MANAGER', path: '/admin' });
+      this.menuItems.push({ label: 'MANAGER', path: '/admin/home' });
     }
   }
 

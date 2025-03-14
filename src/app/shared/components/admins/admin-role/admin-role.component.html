@@ -1,7 +1,9 @@
-<div class="p-4 pb-0 rounded-lg flex">
+<div class="p-4 pt-2 pb-0 rounded-lg flex">
 
-     <div class="w-1/4 border-r border-gray-200 px-6">
-          <h2 class="text-2xl text-gray-6800 font-semibold text-shadow mb-4">Nhóm quyền</h2>
+     <div class="w-1/4 border-r border-gray-200">
+          <h2 class="mb-4 text-2xl text-gray-600">Users <i class="fa-solid fa-angle-right"></i><span
+                    class="ml-4">Role</span>
+          </h2>
           <ul>
                <li *ngFor="let role of roles" (click)="selectRole(role)" [class.text-blue-500]="selectedRole === role"
                     [class.bg-gray-200]="selectedRole === role"

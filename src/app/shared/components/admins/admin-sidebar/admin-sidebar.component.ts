@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Route, Router, RouterModule } from '@angular/router';
 
@@ -9,150 +9,161 @@ import { Route, Router, RouterModule } from '@angular/router';
   templateUrl: './admin-sidebar.component.html',
   styleUrl: './admin-sidebar.component.css',
 })
-export class AdminSidebarComponent {
+export class AdminSidebarComponent implements OnInit {
   @Input() isCollapsed = false;
 
   submenuOpen: { [key: string]: boolean } = {};
   activeMenu: string = 'Home';
   activeSubmenu: string | null = null;
 
-  menus: { key: string; icon: string; subMenus: string[] }[] = [
+  menus: {
+    key: string;
+    icon: string;
+    path: string;
+    subMenus: { key: string; path: string }[];
+  }[] = [
     {
       key: 'Home',
       icon: 'fa-solid fa-house',
+      path: 'admin/home',
       subMenus: [],
     },
     {
       key: 'Dashboard',
       icon: 'fa-solid fa-layer-group',
+      path: 'admin/dashboard',
       subMenus: [],
     },
     {
       key: 'Management',
       icon: 'fa-solid fa-server',
-      subMenus: ['Yard', 'Yard Type', 'Price', 'Day Off', 'Schedule'],
+      path: '',
+      subMenus: [
+        { key: 'Yard', path: 'admin/management/yard' },
+        { key: 'Yard Type', path: 'admin/management/yard-type' },
+        { key: 'Price', path: 'admin/management/price' },
+        { key: 'Day Off', path: 'admin/management/day-off' },
+        { key: 'Schedule', path: 'admin/management/schedule' },
+      ],
     },
     {
       key: 'Services',
       icon: 'fa-solid fa-database',
-      subMenus: ['Booking', 'Service', 'Bill', 'Sale'],
+      path: '',
+      subMenus: [
+        { key: 'Booking', path: 'admin/services/booking' },
+        { key: 'Service', path: 'admin/services/service' },
+        { key: 'Bill', path: 'admin/services/bill' },
+        { key: 'Sale', path: 'admin/services/sale' },
+      ],
     },
     {
       key: 'Other Services',
       icon: 'fa-solid fa-coins',
-      subMenus: ['Inventory Receipt', 'Provider', 'Category'],
+      path: '',
+      subMenus: [
+        {
+          key: 'Inventory Receipt',
+          path: 'admin/other-services/inventory-receipt',
+        },
+        { key: 'Provider', path: 'admin/other-services/provider' },
+        { key: 'Category', path: 'admin/other-services/category' },
+      ],
     },
     {
       key: 'Support',
       icon: 'fa-solid fa-headphones-simple',
+      path: 'admin/support',
       subMenus: [],
     },
     {
       key: 'Users',
       icon: 'fa-solid fa-user',
-      subMenus: ['User Management', 'Roles'],
+      path: '',
+      subMenus: [
+        { key: 'User Management', path: 'admin/users/user-manager' },
+        { key: 'Roles', path: 'admin/users/role' },
+      ],
     },
     {
       key: 'Settings',
       icon: 'fa-solid fa-gear',
-      subMenus: ['My Club', 'Review'],
+      path: '',
+      subMenus: [
+        { key: 'My Club', path: 'admin/settings/my-club' },
+        { key: 'Review', path: 'admin/settings/review' },
+      ],
     },
   ];
 
-  // menus: {
-  //   key: string;
-  //   icon: string;
-  //   path: string;
-  //   subMenus: { key: string; path: string }[];
-  // }[] = [
-  //   {
-  //     key: 'Home',
-  //     icon: 'fa-solid fa-house',
-  //     path: '/home',
-  //     subMenus: [],
-  //   },
-  //   {
-  //     key: 'Dashboard',
-  //     icon: 'fa-solid fa-layer-group',
-  //     path: '/dashboard',
-  //     subMenus: [],
-  //   },
-  //   {
-  //     key: 'Management',
-  //     icon: 'fa-solid fa-server',
-  //     path: '',
-  //     subMenus: [
-  //       { key: 'Yard', path: '/management/yard' },
-  //       { key: 'Yard Type', path: '/management/yard-type' },
-  //       { key: 'Price', path: '/management/price' },
-  //       { key: 'Day Off', path: '/management/day-off' },
-  //       { key: 'Schedule', path: '/management/schedule' },
-  //     ],
-  //   },
-  //   {
-  //     key: 'Services',
-  //     icon: 'fa-solid fa-database',
-  //     path: '',
-  //     subMenus: [
-  //       { key: 'Booking', path: '/services/booking' },
-  //       { key: 'Service', path: '/services/service' },
-  //       { key: 'Bill', path: '/services/bill' },
-  //       { key: 'Sale', path: '/services/sale' },
-  //     ],
-  //   },
-  //   {
-  //     key: 'Other Services',
-  //     icon: 'fa-solid fa-coins',
-  //     path: '',
-  //     subMenus: [
-  //       { key: 'Inventory Receipt', path: '/other-services/inventory-receipt' },
-  //       { key: 'Provider', path: '/other-services/provider' },
-  //       { key: 'Category', path: '/other-services/category' },
-  //     ],
-  //   },
-  //   {
-  //     key: 'Support',
-  //     icon: 'fa-solid fa-headphones-simple',
-  //     path: '/support',
-  //     subMenus: [],
-  //   },
-  //   {
-  //     key: 'Users',
-  //     icon: 'fa-solid fa-user',
-  //     path: '',
-  //     subMenus: [
-  //       { key: 'User Management', path: '/users/user-management' },
-  //       { key: 'Roles', path: '/users/roles' },
-  //     ],
-  //   },
-  //   {
-  //     key: 'Settings',
-  //     icon: 'fa-solid fa-gear',
-  //     path: '',
-  //     subMenus: [
-  //       { key: 'My Club', path: '/settings/my-club' },
-  //       { key: 'Review', path: '/settings/review' },
-  //     ],
-  //   },
-  // ];
-
   constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.updateActiveMenu(this.router.url);
+    this.router.events.subscribe(() => {
+      this.updateActiveMenu(this.router.url);
+    });
+  }
+
+  updateActiveMenu(currentPath: string) {
+    this.activeMenu = 'Home';
+    this.activeSubmenu = null;
+
+    let matchedMenu: string | null = null;
+    let matchedSubmenu: string | null = null;
+    let maxMatchLength = 0;
+
+    for (const menu of this.menus) {
+      if (menu.path && currentPath === '/' + menu.path) {
+        this.activeMenu = menu.key;
+        return;
+      }
+
+      for (const sub of menu.subMenus) {
+        if (currentPath === '/' + sub.path) {
+          this.activeMenu = menu.key;
+          this.activeSubmenu = sub.key;
+          return;
+        }
+
+        // Kiểm tra path dài nhất khớp với URL hiện tại
+        if (
+          currentPath.startsWith('/' + sub.path) &&
+          sub.path.length > maxMatchLength
+        ) {
+          matchedMenu = menu.key;
+          matchedSubmenu = sub.key;
+          maxMatchLength = sub.path.length;
+        }
+      }
+    }
+
+    if (matchedMenu) {
+      this.activeMenu = matchedMenu;
+      this.activeSubmenu = matchedSubmenu;
+    }
+  }
+
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  toggleSubmenu(menu: { key: string; subMenus: string[] }): void {
+  toggleSubmenu(menu: any): void {
     if (menu.subMenus.length > 0) {
       this.submenuOpen[menu.key] = !this.submenuOpen[menu.key];
     } else {
       this.activeMenu = menu.key;
       this.activeSubmenu = null;
     }
+    if (menu.path !== '') {
+      this.router.navigate([menu.path]);
+    }
   }
 
-  setActiveSubmenu(menuKey: string, submenu: string): void {
+  setActiveSubmenu(menuKey: string, submenu: string, path: string): void {
     this.activeSubmenu = submenu;
     this.activeMenu = menuKey;
+    this.router.navigate([path]);
   }
 
   isMenuActive(menuKey: string): boolean {
