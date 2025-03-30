@@ -5,4 +5,5 @@ export const environment = {
   chatHubUrl: `${urlBase}:5000/hubs/chat`,
   apiUrl: `${urlBase}/api/v1/`,
   registerHubUrl: `${urlBase}:5000/hubs/register`,
+  chatBotHubUrl: `http://bookingweb.shop:5005/webhooks/rest/webhook`,
 };
