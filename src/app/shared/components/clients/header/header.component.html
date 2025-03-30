@@ -1,14 +1,25 @@
 <nav class="flex justify-between items-center px-8 py-4 bg-white shadow-md navbar relative">
      <div class="text-xl font-bold flex items-center">
-          <span class="text-blue-600 text-3xl font-bold">Badminton Chill</span>
+          <span class="text-blue-600 text-3xl font-bold">{{ this.UIResource.logo }}</span>
      </div>
 
+     @if(isTenant === true)
+     {
      <div class="hidden md:flex space-x-8">
           <a *ngFor="let item of menuItems" [routerLink]="item.path" [routerLinkActive]="'active-menu'"
                [routerLinkActiveOptions]="{ exact: true }" class="menu-item">
                {{ item.label }}
           </a>
      </div>
+     }
+     @else
+     {
+     <div class="hidden md:flex space-x-8">
+          <a class="menu-item active-menu">
+               {{ this.formattedDate }}
+          </a>
+     </div>
+     }
 
      <div *ngIf="isLogin; else guestButtons" class="hidden md:flex items-center space-x-4 relative">
           <div class="relative">
@@ -24,23 +35,23 @@
                     <a routerLink="/profile" (click)="closeDropdown()"
                          class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
                          <i class="fa-solid fa-circle-user"></i>
-                         <span class="ml-2">Profile</span>
+                         <span class="ml-2">{{ this.UIResource.profile }}</span>
                     </a>
                     <a routerLink="/profile" (click)="closeDropdown()"
                          class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
                          <i class="fa-solid fa-gear"></i>
-                         <span class="ml-2">Settings</span>
+                         <span class="ml-2">{{ this.UIResource.settings }}</span>
                     </a>
                     <a routerLink="/profile" (click)="closeDropdown()"
                          class="block px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition">
                          <i class="fa-solid fa-phone-volume"></i>
-                         <span class="ml-2">Support</span>
+                         <span class="ml-2">{{ this.UIResource.support }}</span>
                     </a>
                     <hr>
                     <button (click)="logout()"
                          class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-400 hover:text-white transition cursor-pointer">
                          <i class="fa-solid fa-right-from-bracket"></i>
-                         <span class="ml-2">Logout</span>
+                         <span class="ml-2">{{ this.UIResource.logout }}</span>
                     </button>
                </div>
           </div>
@@ -52,7 +63,7 @@
           <div class="hidden md:flex space-x-6">
                <button routerLink="/auth"
                     class="bg-blue-200 text-blue-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-blue-300">
-                    Login
+                    {{ this.UIResource.login }}
                </button>
           </div>
      </ng-template>
@@ -62,6 +73,7 @@
           <i class="fas fa-bars"></i>
      </button>
 
+     @if(isTenant === true){
      <div *ngIf="isMenuOpen"
           class="absolute top-16 left-0 w-full bg-white shadow-md md:hidden flex flex-col items-center py-4 transition-all duration-500 ease-in-out transform origin-top scale-y-0 opacity-0"
           [class.scale-y-100]="isMenuOpen" [class.opacity-100]="isMenuOpen">
@@ -76,19 +88,21 @@
                <span class="text-lg font-semibold">{{ userName }}</span>
                <button (click)="logout()"
                     class="bg-red-500 text-white px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-red-600 w-28 mt-2">
-                    Logout
+                    {{ this.UIResource.logout }}
                </button>
           </div>
 
           <ng-template #mobileGuestButtons>
                <button
                     class="bg-blue-200 text-blue-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-blue-300 w-28 mt-2 transition-all duration-300">
-                    Login
+                    {{ this.UIResource.login }}
                </button>
                <button
                     class="bg-gray-200 text-gray-700 px-5 py-2 rounded-full text-lg font-semibold cursor-pointer hover:bg-gray-300 w-28 mt-2 transition-all duration-300">
-                    Sign Up
+                    {{ this.UIResource.signUp}}
                </button>
           </ng-template>
      </div>
+     }
+
 </nav>

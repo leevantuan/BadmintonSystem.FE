@@ -46,4 +46,17 @@ export class BookDetailComponent {
       this.isClosing = false;
     }
   }
+
+  public UIResource = {
+    bookingInfo: 'Thông tin đặt lịch',
+    yardName: 'Tên sân',
+    address: 'Địa chỉ',
+    date: 'Ngày',
+    people: 'Đối tượng',
+    totalTime: 'Tổng giờ',
+    totalPrice: 'Tổng tiền',
+    myName: 'TÊN CỦA BẠN',
+    phoneNumber: 'SỐ ĐIỆN THOẠI',
+    confirm: 'XÁC NHẬN & THANH TOÁN',
+  };
 }

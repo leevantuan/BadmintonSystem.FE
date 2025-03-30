@@ -26,6 +26,7 @@ import { AdminSupportComponent } from './pages/admins/admin-support/admin-suppor
 import { AdminUserManagerComponent } from './pages/admins/admin-user-manager/admin-user-manager.component';
 import { AdminMyClubComponent } from './pages/admins/admin-my-club/admin-my-club.component';
 import { AdminReviewComponent } from './pages/admins/admin-review/admin-review.component';
+import { TenantComponent } from './pages/clients/tenant/tenant.component';
 
 export const routes: Routes = [
   {
@@ -36,7 +37,8 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component: TenantComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'book', component: BookComponent },
       { path: 'support', component: SupportComponent },

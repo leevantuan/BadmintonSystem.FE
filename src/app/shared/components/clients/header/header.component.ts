@@ -9,6 +9,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
+  isTenant: boolean = false;
   isMenuOpen = false;
   isActiveMenu: string = '/';
   isLogin = false;
@@ -49,6 +50,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  date = new Date();
+  formattedDate = this.date.toLocaleDateString('vi-VN', {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+
   isAdmin() {
     const isAdmin = localStorage.getItem('isAdmin');
     if (isAdmin && isAdmin == 'true') {
@@ -73,4 +82,14 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = false;
     this.router.navigate(['/auth']);
   }
+
+  public UIResource = {
+    logo: 'Badminton Chill',
+    profile: 'Profile',
+    settings: 'Settings',
+    support: 'Support',
+    logout: 'Logout',
+    login: 'Login',
+    signUp: 'Sign Up',
+  };
 }

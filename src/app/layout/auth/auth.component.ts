@@ -20,4 +20,9 @@ export class AuthComponent {
   signUp(message: string) {
     this.isLogin = true;
   }
+
+  public UIResource = {
+    bookBanner: 'Booking Web',
+    managementSystem: 'Management System',
+  };
 }

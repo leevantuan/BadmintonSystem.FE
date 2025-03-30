@@ -4,7 +4,7 @@
     <form [formGroup]="loginForm">
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-lg" [ngClass]="{ 'text-red-600': emailError }">
-          Email address
+          {{ this.UIResource.emailAddress }}
         </label>
         <input type="email" formControlName="email" [ngClass]="{ 'border-red-600': emailError }"
           class="w-full px-4 py-2 border rounded-lg text-lg focus:ring focus:ring-blue-300" />
@@ -16,7 +16,7 @@
       <div class="mb-4">
         <div class="relative">
           <label for="password" class="block text-gray-700 text-lg" [ngClass]="{ 'text-red-600': passwordError }">
-            Password
+            {{ this.UIResource.password }}
           </label>
           <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
             [ngClass]="{ 'border-red-600': passwordError }"
@@ -31,18 +31,18 @@
 
       <button type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()"
         class="cursor-pointer mt-4 w-full bg-blue-600 text-white py-3 rounded-lg text-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">
-        Login
+        {{ this.UIResource.login }}
       </button>
 
       <div class="mt-4 text-center">
         <p class="text-gray-600 text-sm">
           Don't have an account?
-          <a (click)="signUp()" class="text-blue-600 font-semibold hover:underline cursor-pointer">Sign up</a>
+          <a (click)="signUp()" class="text-blue-600 font-semibold hover:underline cursor-pointer">{{
+            this.UIResource.signUp }}</a>
         </p>
       </div>
     </form>
 
-    <!-- Social Login Buttons -->
     <div class="mt-4 text-center">
       <p class="text-gray-600 text-sm">or login with:</p>
       <div class="flex justify-center space-x-4 mt-3 text-2xl">

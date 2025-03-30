@@ -4,10 +4,8 @@
           [ngClass]="{'w-1/5': !isCollapsed, 'w-20': isCollapsed}" [isCollapsed]="isCollapsed"></app-admin-sidebar>
 
      <div class="flex flex-col w-full">
-          <!-- Header -->
           <app-admin-header class="w-full" (toggleMenu)="toggleMenu($event)"></app-admin-header>
 
-          <!-- Main Page Content -->
           <main class="flex-1 p-6 bg-white ml-8 mr-3 my-3 rounded-xl shadow-xl">
                <router-outlet></router-outlet>
           </main>

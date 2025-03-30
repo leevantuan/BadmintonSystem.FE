@@ -67,7 +67,6 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
-  // Validator Invalid Form
   get emailError(): string | null {
     const control = this.loginForm.controls['email'];
     if (control.touched) {
@@ -84,4 +83,11 @@ export class LoginComponent {
     }
     return null;
   }
+
+  public UIResource = {
+    emailAddress: 'Email Address',
+    password: 'Password',
+    login: 'Login',
+    signUp: 'Sign Up',
+  };
 }

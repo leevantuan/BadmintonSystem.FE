@@ -12,25 +12,25 @@
           </button>
 
           <h2 class="text-xl font-bold text-center mb-4 text-blue-600">
-               📅 Thông tin đặt lịch
+               📅 {{ this.UIResource.bookingInfo }}
           </h2>
-          <p><strong>Tên sân:</strong> {{ bookingInfo.clubName }}</p>
-          <p><strong>Địa chỉ:</strong> {{ bookingInfo.address }}</p>
-          <p><strong>Ngày:</strong> {{ bookingInfo.date }}</p>
+          <p><strong>{{ this.UIResource.yardName }}:</strong> {{ bookingInfo.clubName }}</p>
+          <p><strong>{{ this.UIResource.address }}:</strong> {{ bookingInfo.address }}</p>
+          <p><strong>{{ this.UIResource.date }}:</strong> {{ bookingInfo.date }}</p>
           <div *ngFor="let slot of bookingInfo.slots">
                <p>🕒 {{ slot.time }} | 💰 {{ slot.price.toLocaleString() }} đ</p>
           </div>
-          <p><strong>Đối tượng:</strong> {{ bookingInfo.target }}</p>
-          <p><strong>Tổng giờ:</strong> {{ bookingInfo.totalHours }}</p>
-          <p><strong>Tổng tiền:</strong> {{ bookingInfo.totalPrice.toLocaleString() }} đ</p>
+          <p><strong>{{ this.UIResource.people }}:</strong> {{ bookingInfo.target }}</p>
+          <p><strong>{{ this.UIResource.totalTime }}:</strong> {{ bookingInfo.totalHours }}</p>
+          <p><strong>{{ this.UIResource.totalPrice }}:</strong> {{ bookingInfo.totalPrice.toLocaleString() }} đ</p>
 
           <div class="mt-4">
-               <label class="block">TÊN CỦA BẠN</label>
+               <label class="block">{{ this.UIResource.myName }}</label>
                <input [(ngModel)]="user.name" type="text"
                     class="w-full p-2 rounded-lg text-black bg-white border border-gray-400 shadow-lg"
                     placeholder="Nhập tên của bạn">
 
-               <label class="block mt-3">SỐ ĐIỆN THOẠI</label>
+               <label class="block mt-3">{{ this.UIResource.phoneNumber }}</label>
                <input [(ngModel)]="user.phone" type="text"
                     class="w-full p-2 rounded-lg text-black bg-white border border-gray-400 shadow-lg"
                     placeholder="Nhập số điện thoại">
@@ -38,7 +38,7 @@
 
           <button (click)="confirmBooking()"
                class="w-full bg-blue-800 text-white py-2 mt-4 rounded-lg font-bold hover:bg-blue-700 cursor-pointer">
-               XÁC NHẬN & THANH TOÁN
+               {{ this.UIResource.confirm }}
           </button>
      </div>
 </div>
