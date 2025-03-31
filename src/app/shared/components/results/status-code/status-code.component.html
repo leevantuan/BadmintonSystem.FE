@@ -1,0 +1,18 @@
+<div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+     <div class="relative w-[320px]">
+          <img [src]="imageLink" alt="Forbidden Access" class="w-80 h-80 mb-4" />
+
+          <div class="absolute top-0 right-[50px] transform translate-x-1/2 -translate-y-1/2 
+                     text-white w-18 h-18 flex items-center justify-center rounded-full shadow-lg" [class]="colorIcon">
+               <i [class]="htmlIcon"></i>
+          </div>
+     </div>
+     <h1 class="text-6xl font-bold text-red-600 text-center">{{ statusCode }}</h1>
+     <p class="text-xl text-gray-600 mt- text-center2">{{ description }}</p>
+     <div class="flex flex-col items-center mt-4">
+          <button class="text-xl px-6 py-4 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 cursor-pointer"
+               (click)="goHome()">
+               Back Home
+          </button>
+     </div>
+</div>

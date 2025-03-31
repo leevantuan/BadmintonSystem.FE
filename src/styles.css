@@ -31,3 +31,7 @@ body {
 .main-animation-button {
   transition: 0.3s ease;
 }
+
+button {
+  cursor: pointer !important;
+}

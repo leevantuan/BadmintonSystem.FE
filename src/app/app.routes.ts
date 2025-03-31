@@ -27,11 +27,24 @@ import { AdminUserManagerComponent } from './pages/admins/admin-user-manager/adm
 import { AdminMyClubComponent } from './pages/admins/admin-my-club/admin-my-club.component';
 import { AdminReviewComponent } from './pages/admins/admin-review/admin-review.component';
 import { TenantComponent } from './pages/clients/tenant/tenant.component';
+import { ForbiddenComponent } from './pages/results/forbidden/forbidden.component';
+import { InternalServerErrorComponent } from './pages/results/internal-server-error/internal-server-error.component';
+import { NotFoundComponent } from './pages/results/not-found/not-found.component';
+import { SuccessComponent } from './pages/results/success/success.component';
 
 export const routes: Routes = [
   {
     path: 'auth',
     children: [{ path: '', component: AuthComponent }],
+  },
+  {
+    path: 'results',
+    children: [
+      { path: 'code/403', component: ForbiddenComponent },
+      { path: 'code/404', component: NotFoundComponent },
+      { path: 'code/500', component: InternalServerErrorComponent },
+      { path: 'success', component: SuccessComponent },
+    ],
   },
   {
     path: '',
