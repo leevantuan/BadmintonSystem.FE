@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { SessionStorageService } from '../../../../core/services/session-storage/session-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -11,27 +12,45 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isTenant: boolean = false;
   isMenuOpen = false;
-  isActiveMenu: string = '/';
+  isActiveMenu: string = '/home';
   isLogin = false;
   userName: string | null = '';
   userAvatar: string | null = '';
   isDropdownOpen = false;
 
   menuItems = [
-    { label: 'HOME', path: '/' },
+    { label: 'HOME', path: '/home' },
     { label: 'SHOP', path: '/shop' },
     { label: 'BOOK', path: '/book' },
     { label: 'SUPPORT', path: '/support' },
   ];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private sessionStorageService: SessionStorageService
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isActiveMenu = event.urlAfterRedirects;
       }
     });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const isPageTenant = event.urlAfterRedirects === '/';
+        if (isPageTenant) {
+          this.isTenant = false;
+          this.sessionStorageService.removeItem('tenantCode');
+        } else {
+          this.isTenant = true;
+        }
+      }
+    });
   }
   ngOnInit(): void {
+    if (this.sessionStorageService.getItem('tenantCode') !== null) {
+      this.isTenant = true;
+    }
+
     if (typeof localStorage !== 'undefined') {
       const loginStatus = localStorage.getItem('isLogin');
       if (loginStatus === 'true') {
@@ -57,6 +76,10 @@ export class HeaderComponent implements OnInit {
     month: '2-digit',
     year: 'numeric',
   });
+
+  handleClickLogo() {
+    this.router.navigate(['/']);
+  }
 
   isAdmin() {
     const isAdmin = localStorage.getItem('isAdmin');

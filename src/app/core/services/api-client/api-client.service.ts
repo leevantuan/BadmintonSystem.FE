@@ -9,22 +9,22 @@ import { environment } from '../../../environments/environment';
 export class ApiClientService {
   baseUrl = environment.apiUrl;
   public get header() {
-    let token = localStorage.getItem('accessToken')?.toString();
+    // let token = localStorage.getItem('accessToken')?.toString();
     let code = localStorage.getItem('tenant')?.toString();
     return new HttpHeaders({
       accept: '*/*',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
       tenant: code + '',
     });
   }
 
   public get headerNoTenant() {
-    let token = localStorage.getItem('accessToken')?.toString();
+    // let token = localStorage.getItem('accessToken')?.toString();
     return new HttpHeaders({
       accept: '*/*',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
     });
   }
 

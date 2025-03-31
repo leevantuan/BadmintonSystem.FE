@@ -7,15 +7,31 @@ export class SessionStorageService {
   constructor() {}
 
   setItem(key: string, value: string) {
-    sessionStorage.setItem(key, value);
+    if (
+      typeof window !== 'undefined' &&
+      typeof sessionStorage !== 'undefined'
+    ) {
+      sessionStorage.setItem(key, value);
+    }
   }
 
   getItem(key: string): string | null {
-    return sessionStorage.getItem(key);
+    if (
+      typeof window !== 'undefined' &&
+      typeof sessionStorage !== 'undefined'
+    ) {
+      return sessionStorage.getItem(key);
+    }
+    return null;
   }
 
   removeItem(key: string) {
-    sessionStorage.removeItem(key);
+    if (
+      typeof window !== 'undefined' &&
+      typeof sessionStorage !== 'undefined'
+    ) {
+      sessionStorage.removeItem(key);
+    }
   }
 
   clearAll() {
