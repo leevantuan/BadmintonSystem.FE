@@ -26,8 +26,9 @@ export class TenantComponent implements OnInit {
     });
   }
 
-  handlerClickBook(code: string) {
-    sessionStorage.setItem('tenantCode', code);
+  handlerClickBook(tenant: TenantResponse) {
+    sessionStorage.setItem('tenantCode', tenant.code);
+    sessionStorage.setItem('tenantId', tenant.id);
   }
 
   public UIResource = {
