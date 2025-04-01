@@ -16,15 +16,19 @@
           </h2>
           <p><strong>{{ this.UIResource.yardName }}:</strong> {{ bookingInfo.clubName }}</p>
           <p><strong>{{ this.UIResource.address }}:</strong> {{ bookingInfo.address }}</p>
-          <p><strong>{{ this.UIResource.date }}:</strong> {{ bookingInfo.date }}</p>
-          <div *ngFor="let slot of bookingInfo.slots">
-               <p>🕒 {{ slot.time }} | 💰 {{ slot.price.toLocaleString() }} đ</p>
+          <p><strong>{{ this.UIResource.date }}:</strong> {{ formattedDate }}</p>
+          @for(slot of bookingInfo.slots; track slot)
+          {
+          <div>
+               <p>🕒 {{ slot.startTime }} - {{ slot.endTime}}| 💰 {{ slot.price.toLocaleString() }} đ</p>
           </div>
+          }
+
           <p><strong>{{ this.UIResource.people }}:</strong> {{ bookingInfo.target }}</p>
-          <p><strong>{{ this.UIResource.totalTime }}:</strong> {{ bookingInfo.totalHours }}</p>
+          <p><strong>{{ this.UIResource.totalTime }}:</strong> {{ bookingInfo.totalHours }}h</p>
           <p><strong>{{ this.UIResource.totalPrice }}:</strong> {{ bookingInfo.totalPrice.toLocaleString() }} đ</p>
 
-          <div class="mt-4">
+          <div class=" mt-4">
                <label class="block">{{ this.UIResource.myName }}</label>
                <input [(ngModel)]="user.name" type="text"
                     class="w-full p-2 rounded-lg text-black bg-white border border-gray-400 shadow-lg"

@@ -30,16 +30,27 @@
                <thead>
                     <tr>
                          <th class="p-2 border bg-blue-300">Sân</th>
-                         <th *ngFor="let slot of fields[0]?.slots" class="p-2 border bg-blue-300">{{ slot.time }}</th>
+                         @for(slot of timeSlots; track slot)
+                         {
+                         <th class="p-2 border bg-blue-300">{{ slot.startTime | dateFormat }} - {{ slot.endTime |
+                              dateFormat }}</th>
+                         }
                     </tr>
                </thead>
                <tbody>
-                    <tr *ngFor="let field of fields">
-                         <td class="p-2 border bg-blue-300">{{ field.name }}</td>
-                         <td *ngFor="let slot of field.slots" class="p-2 border cursor-pointer text-center"
-                              [ngClass]="getSlotClass(field, slot)" (click)="toggleSlot(field, slot)">
+                    @for(yardPrice of yardPries; track yardPrice)
+                    {
+                    <tr>
+                         <td class="p-2 border bg-blue-300">{{ yardPrice.yard.name }}</td>
+                         @for(slot of yardPrice.yardPricesDetails; track slot)
+                         {
+                         <td class="p-2 border text-center" [ngClass]="statusSlot(slot)" (click)="selectedSlot(slot)">
                          </td>
+                         }
+
                     </tr>
+                    }
+
                </tbody>
           </table>
      </div>
@@ -47,7 +58,17 @@
      <div class="fixed bottom-0 left-0 w-full px-1 pb-1">
           <div class="bg-gray-400 text-white p-4 rounded-t-2xl rounded-b-md shadow-lg shadow-white/50">
                <div class="font-bold flex flex-col">
-                    <p class="whitespace-normal">Tổng giờ: {{ selectedSlots.length * 0.5 }}h</p>
+                    <p class="whitespace-normal">Tổng giờ: {{ totalTime }}h</p>
+                    @if(selectedYardPrice)
+                    {
+                    <div class="flex flex-wrap gap-2">
+                         @for(selectedSlot of selectedYardPrice; track selectedSlot) {
+                         <span class="p-2 whitespace-nowrap">
+                              | {{ selectedSlot.startTime | dateFormat }} - {{ selectedSlot.endTime | dateFormat }}
+                         </span>
+                         }
+                    </div>
+                    }
                     <div class="border-t border-white my-2"></div>
                     <p>Tổng tiền: {{ totalPrice | currency:'VND' }}</p>
                </div>
@@ -60,4 +81,5 @@
      </div>
 </div>
 
-<app-book-detail [showPopup]="showPopup" (showPopupChange)="handlePopupChange($event)"></app-book-detail>
+<app-book-detail [showPopup]="showPopup" (showPopupChange)="handlePopupChange($event)"
+     [bookingInfo]="bookingInfo"></app-book-detail>

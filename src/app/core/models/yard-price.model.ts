@@ -2,60 +2,57 @@ import BaseResponseModel from './base.response.model';
 import { YardModel } from './yard.model';
 
 export class YardPriceModel {
-  id: string;
   startTime: string;
   endTime: string;
   price: number;
-  isToken: string | null;
-  expirationTime: string | null;
   yardId: string;
   priceId: string;
   timeSlotId: string;
   effectiveDate: string;
   isBooking: number;
+  id: string;
+  isToken: string | null;
+  expirationTime: string | null;
 
   constructor(
-    id: string = '',
-    startTime: string = '',
-    endTime: string = '',
-    price: number = 0,
-    isToken: string | null = null,
-    expirationTime: string | null = null,
-    yardId: string = '',
-    priceId: string = '',
-    timeSlotId: string = '',
-    effectiveDate: string = '',
-    isBooking: number = 0
+    startTime: string,
+    endTime: string,
+    price: number,
+    yardId: string,
+    priceId: string,
+    timeSlotId: string,
+    effectiveDate: string,
+    isBooking: number,
+    id: string,
+    isToken: string | null,
+    expirationTime: string | null
   ) {
-    this.id = id;
     this.startTime = startTime;
     this.endTime = endTime;
     this.price = price;
-    this.isToken = isToken;
-    this.expirationTime = expirationTime;
     this.yardId = yardId;
     this.priceId = priceId;
     this.timeSlotId = timeSlotId;
     this.effectiveDate = effectiveDate;
     this.isBooking = isBooking;
+    this.id = id;
+    this.isToken = isToken;
+    this.expirationTime = expirationTime;
   }
 }
 
 export class YardPriceByDateModel {
   yard: YardModel;
-  yardPriceDetails: YardPriceModel[];
+  yardPricesDetails: YardPriceModel[];
 
-  constructor(
-    yard: YardModel = new YardModel(),
-    yardPriceDetails: YardPriceModel[] = []
-  ) {
+  constructor(yard: YardModel, yardPricesDetails: YardPriceModel[]) {
     this.yard = yard;
-    this.yardPriceDetails = yardPriceDetails;
+    this.yardPricesDetails = yardPricesDetails;
   }
 }
 
 export class YardPriceByDateModelResponse extends BaseResponseModel {
-  override value: YardPriceByDateModel;
+  override value: YardPriceByDateModel[];
 
   constructor(data: any) {
     super(data);

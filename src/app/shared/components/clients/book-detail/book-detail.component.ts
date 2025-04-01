@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BookInfoModel } from '../../../../core/models/book-info.model';
 
 @Component({
   selector: 'app-book-detail',
@@ -10,21 +11,37 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookDetailComponent {
   @Input() showPopup: boolean = true;
-  @Output() showPopupChange = new EventEmitter<boolean>();
-
-  bookingInfo = {
+  @Input() bookingInfo: BookInfoModel = {
     clubName: 'Badminton Chill Clubs',
     address: '123 Đường Cầu Lông, TP.Biên Hoà, Đồng Nai',
-    date: '12/03/2025',
+    date: new Date(),
     slots: [
-      { time: '12h30 - 13h00', price: 20000 },
-      { time: '14h00 - 14h30', price: 20000 },
-      { time: '13h00 - 13h30', price: 20000 },
+      {
+        startTime: '05:40:00',
+        endTime: '06:40:00',
+        price: 60000,
+        isToken: null,
+        expirationTime: null,
+        yardId: '5a3b85ee-cb4b-43cb-ab7b-c5d449f5dd7c',
+        priceId: 'f9d92bc8-86a0-49da-84d2-8effa622e500',
+        timeSlotId: '70bb6ad3-5a72-41e5-bb71-16e2eb2abdde',
+        effectiveDate: '2025-03-27T00:00:00Z',
+        isBooking: 0,
+        id: '0525e2cf-f406-40b5-9529-67fdbbe26fa3',
+      },
     ],
     target: 'Học sinh - sinh viên',
-    totalHours: '1h30',
+    totalHours: 3,
     totalPrice: 60000,
   };
+  @Output() showPopupChange = new EventEmitter<boolean>();
+
+  formattedDate = this.bookingInfo.date.toLocaleDateString('vi-VN', {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
 
   user = {
     name: '',

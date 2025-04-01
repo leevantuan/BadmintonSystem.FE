@@ -2,20 +2,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { SessionStorageService } from '../session-storage/session-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiClientService {
   baseUrl = environment.apiUrl;
+
+  constructor(
+    private httpClient: HttpClient,
+    private sessionStorageService: SessionStorageService
+  ) {}
+
   public get header() {
-    // let token = localStorage.getItem('accessToken')?.toString();
-    let code = localStorage.getItem('tenant')?.toString();
+    // let token = this.sessionStorageService.getItem('accessToken')?.toString();
+    let code = this.sessionStorageService.getItem('tenantCode')?.toString();
+
+    if (code) {
+      return new HttpHeaders({
+        accept: '*/*',
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${token}`,
+        tenant: code + '',
+      });
+    }
     return new HttpHeaders({
       accept: '*/*',
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
-      tenant: code + '',
     });
   }
 
@@ -28,7 +42,6 @@ export class ApiClientService {
     });
   }
 
-  constructor(private httpClient: HttpClient) {}
   /**Get request */
   get<T>(url: string): Observable<T> {
     return this.httpClient.get<T>(this.baseUrl + url, { headers: this.header });
